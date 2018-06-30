@@ -48,6 +48,8 @@ public class FetchService extends Service {
         NotificationChannel channel = new NotificationChannel(CHANNEL_ID, "Cardinal-AOSP", NotificationManager.IMPORTANCE_DEFAULT);
         ((NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE)).createNotificationChannel(channel);
         Notification notification = new NotificationCompat.Builder(this, CHANNEL_ID)
+                .setSmallIcon(R.drawable.ic_ota_download)
+                .setBadgeIconType(R.drawable.ic_ota_download)
                 .setContentTitle("")
                 .setContentText("").build();
         startForeground(1, notification);
