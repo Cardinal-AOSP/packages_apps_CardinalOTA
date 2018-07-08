@@ -7,18 +7,33 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.StringTokenizer;
 
-import eu.chainfire.libsuperuser.Shell;
-
 public class Utils {
+
     public static String getProp(String prop) {
-        String value = Shell.SH.run("getprop " + prop).get(0);
-        return value;
+        String retProp = null;
+
+        try {
+            Process process = new ProcessBuilder("/system/bin/getprop", prop).redirectErrorStream(true).start();
+            BufferedReader br = new BufferedReader(new InputStreamReader(process.getInputStream()));
+            String line = "";
+            while ((line=br.readLine()) != null){
+                retProp = line;
+            }
+            process.destroy();
+            br.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return retProp;
     }
 
     public static boolean isValidDate(String value) {
