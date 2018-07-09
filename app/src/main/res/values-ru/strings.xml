@@ -13,4 +13,6 @@
   <string name="ota_update_available">Последняя версия доступна для обновления</string>
   <string name="ota_download_title">Скачать</string>
   <string name="ota_download_summary">Долг. нажатие для опций</string>
+  <string name="set">Прменить</string>
+  <string name="cancel">Отмена</string>
 </resources>

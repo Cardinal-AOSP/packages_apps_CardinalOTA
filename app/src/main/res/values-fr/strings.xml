@@ -13,4 +13,5 @@
   <string name="ota_update_available">Dernière version est disponible pour la mise à jour</string>
   <string name="ota_download_title">Téléchargez</string>
   <string name="ota_download_summary">Appui long pour plus d\'options</string>
+  <string name="cancel">Annuler</string>
 </resources>

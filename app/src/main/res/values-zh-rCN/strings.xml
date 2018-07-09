@@ -13,4 +13,6 @@
   <string name="ota_update_available">最新版本可用于更新</string>
   <string name="ota_download_title">下载</string>
   <string name="ota_download_summary">长按显示更多选项</string>
+  <string name="set">设置</string>
+  <string name="cancel">取消</string>
 </resources>
