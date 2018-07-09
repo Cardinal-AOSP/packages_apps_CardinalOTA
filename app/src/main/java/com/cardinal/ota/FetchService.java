@@ -194,11 +194,11 @@ public class FetchService extends Service {
                             NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(getApplicationContext(), "id")
                                     .setSmallIcon(R.drawable.ic_ota_download)
                                     .setBadgeIconType(R.drawable.ic_ota_download)
-                                    .setContentTitle("Cardinal-AOSP Update Available")
+                                    .setContentTitle(getApplicationContext().getResources().getString(R.string.ota_download_notification_title))
                                     .setAutoCancel(true).setContentIntent(pendingIntent)
                                     .setNumber(1)
                                     .setColor(255)
-                                    .setContentText("Tap here to open OTA app")
+                                    .setContentText(getApplicationContext().getResources().getString(R.string.ota_download_notification_summary))
                                     .setWhen(System.currentTimeMillis());
 
                             notificationManager.notify(1, notificationBuilder.build());
