@@ -10,8 +10,10 @@
     <string name="ota_network_error">Network error</string>
     <string name="ota_update_available">Latest build is available for update</string>
     <string name="ota_download_title">Download</string>
+    <string name="ota_schedule_title">Schedule check for updates</string>
     <string name="ota_download_notification_title">Cardinal-AOSP Update Available</string>
     <string name="ota_download_notification_summary">Tap here for more details</string>
+    <string name="ota_check_update_notification_title">Checking for updates...</string>
     <string name="ota_download_summary">Long Press for more options</string>
     <string name="set">Set</string>
     <string name="cancel">Cancel</string>

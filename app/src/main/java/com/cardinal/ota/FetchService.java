@@ -50,8 +50,8 @@ public class FetchService extends Service {
         Notification notification = new NotificationCompat.Builder(this, CHANNEL_ID)
                 .setSmallIcon(R.drawable.ic_ota_download)
                 .setBadgeIconType(R.drawable.ic_ota_download)
-                .setContentTitle("")
-                .setContentText("").build();
+                .setContentTitle(getApplicationContext().getResources().getString(R.string.ota_check_update_notification_title))
+                .build();
         startForeground(1, notification);
 
         String checkDevice = getProp(Constants.ROM_DEVICE_PROP);

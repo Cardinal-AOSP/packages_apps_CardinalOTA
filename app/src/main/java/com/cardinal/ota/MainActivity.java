@@ -16,7 +16,6 @@ import android.graphics.drawable.ColorDrawable;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.preference.Preference;
@@ -52,7 +51,6 @@ public class MainActivity extends PreferenceActivity implements Preference.OnPre
     private Preference mRomInfo;
     private Preference mCheckUpdate;
     private Preference mUpdateLink;
-    private TimePreference mScheduleUpdate;
     private ProgressDialog dialog;
     private static final int PERMISSION_REQUEST_CODE = 200;
     private String downUri;
@@ -69,21 +67,21 @@ public class MainActivity extends PreferenceActivity implements Preference.OnPre
         lv.setDividerHeight(0);
 
         dialog = ProgressDialog.show(MainActivity.this, "", getString(R.string.ota_dialog_message), true);
-
         addPreferencesFromResource(R.xml.preference_cardinal_ota);
         mRomInfo = (Preference) getPreferenceScreen().findPreference(KEY_ROM_INFO);
         mCheckUpdate = (Preference) getPreferenceScreen().findPreference(KEY_CHECK_UPDATE);
-        mScheduleUpdate = (TimePreference) getPreferenceScreen().findPreference(KEY_SCHEDULE_PREF);
-        mRomInfo.setIcon(R.drawable.ic_ota_info);
-        mCheckUpdate.setIcon(R.drawable.ic_ota_refresh);
-        mScheduleUpdate.setTitle("Schedule Check for Updates");
-        mScheduleUpdate.setIcon(R.drawable.ic_ota_schedule);
+        mRomInfo.setIcon(ContextCompat.getDrawable(this, R.drawable.ic_ota_info));
+        mCheckUpdate.setIcon(ContextCompat.getDrawable(this, R.drawable.ic_ota_refresh));
+
+        TimePreference mScheduleUpdate = (TimePreference) getPreferenceScreen().findPreference(KEY_SCHEDULE_PREF);
+        mScheduleUpdate.setTitle(R.string.ota_schedule_title);
+        mScheduleUpdate.setIcon(ContextCompat.getDrawable(this, R.drawable.ic_ota_schedule));
         if (mScheduleUpdate.getSummary() == null)
             mScheduleUpdate.setSummary("12:00");
         mScheduleUpdate.setDefaultValue("12:00");
 
         mUpdateLink = (Preference) getPreferenceScreen().findPreference(KEY_UPDATE_LINK);
-        mUpdateLink.setIcon(R.drawable.ic_ota_download);
+        mUpdateLink.setIcon(ContextCompat.getDrawable(this, R.drawable.ic_ota_download));
         mUpdateLink.setTitle(R.string.ota_download_title);
         mUpdateLink.setSummary(R.string.ota_download_summary);
 
@@ -97,7 +95,6 @@ public class MainActivity extends PreferenceActivity implements Preference.OnPre
                     editor.putString("datetime", currentDateTimeString);
                     editor.commit();
                     mRomInfo.setSummary("");
-
                     updatePreferences();
                 } else updatePreferences();
                 return false;
@@ -240,11 +237,9 @@ public class MainActivity extends PreferenceActivity implements Preference.OnPre
                                 r.allowScanningByMediaScanner();
                                 r.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
                                 DownloadManager dm = (DownloadManager) getSystemService(DOWNLOAD_SERVICE);
-                                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                                    if (checkPermission())
-                                        dm.enqueue(r);
-                                    else requestPermission();
-                                } else dm.enqueue(r);
+                                if (checkPermission())
+                                    dm.enqueue(r);
+                                else requestPermission();
                                 return false;
                             }
                         });
