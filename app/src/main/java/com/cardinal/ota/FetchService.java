@@ -64,6 +64,11 @@ public class FetchService extends Service {
                 .build();
         if (isConnected())
             new FetchTask().execute(ctrBaseUrl.toString());
+        else {
+            stopForeground(true);
+            NotificationManager notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+            notificationManager.cancel(1);
+        }
     }
 
     @Nullable
